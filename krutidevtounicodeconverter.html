@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krutidev to Unicode Converter</title>
+    <link rel="stylesheet" href=style.css>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Krutidev to Unicode Converter</h1>
+            <p>Convert Krutidev font text to Unicode Devanagari format</p>
+        </header>
+
+        <div class="converter-box">
+            <div class="text-area-container">
+                <div class="text-area-wrapper">
+                    <label for="krutidevText">Krutidev Text:</label>
+                    <textarea id="krutidevText" placeholder="Enter Krutidev font text here..."></textarea>
+                </div>
+                <div class="buttons">
+                    <button id="convertBtn">Convert to Unicode</button></div>
+                <div class="text-area-wrapper">
+                    <label for="unicodeText">Unicode Devanagari Text:</label>
+                    <textarea id="unicodeText" placeholder="Unicode converted text will appear here..." readonly></textarea>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button id="clearBtn">Clear All</button>
+                <button id="copyBtn">Copy Unicode Text</button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>How to Use</h2>
+            <p>1. Type or paste Krutidev font text in the left text area.</p>
+            <p>2. Click "Convert to Unicode" to convert the text to Unicode Devanagari format.</p>
+            <p>3. Use "Copy Unicode Text" to copy the converted text to your clipboard.</p>
+            <p>4. Use "Clear All" to reset both text areas.</p>
+        </div>
+
+        <div class="info-section">
+            <h2>About Krutidev Font</h2>
+            <p>Krutidev is a legacy font for Devanagari script that was widely used before Unicode became standard. This converter helps you convert Krutidev font text to modern Unicode Devanagari for better compatibility with modern systems and web applications.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 unicodetokrutidev.github.io</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const krutidevText = document.getElementById('krutidevText');
+            const unicodeText = document.getElementById('unicodeText');
+            const convertBtn = document.getElementById('convertBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const copyBtn = document.getElementById('copyBtn');
+
+            // Conversion mapping from Krutidev to Unicode
+            const krutidevToUnicode = {
+                // Vowels
+                'd': 'अ', 'D': 'आ', 'f': 'इ', 'F': 'ई', 'g': 'उ', 'G': 'ऊ',
+                'k': 'ए', 'K': 'ऐ', 'l': 'ओ', 'L': 'औ', 'j': 'ऋ', 'J': 'ॠ',
+                'H': 'ऌ', 'h': 'ॡ',
+
+                // Consonants
+                's': 'क', 'v': 'ख', 'u': 'ग', '¢': 'घ', 'Ù': 'ङ',
+                'r': 'च', 'R': 'छ', 't': 'ज', 'T': 'झ', 'y': 'ञ',
+                'w': 'ट', 'W': 'ठ', 'q': 'ड', 'Q': 'ढ', 'X': 'ण',
+                'e': 'त', 'E': 'थ', 'a': 'द', 'A': 'ध', 'z': 'न',
+                'p': 'प', 'P': 'फ', 'c': 'ब', 'C': 'भ', 'n': 'म',
+                'i': 'य', 'b': 'र', 'o': 'ल', 'O': 'व', ';': 'श',
+                "'": 'ष', 'x': 'स', ']': 'ह', '\\': 'ळ', '%': 'क्ष',
+                '+': 'त्र', '^': 'ज्ञ',
+
+                // Half forms
+                'Ì': '्',
+
+                // Matras
+                'm': 'ा', 'ä': 'ि', 'Å': 'ी', 'Ï': 'ु', 'Ò': 'ू',
+                'ç': 'े', 'è': 'ै', 'é': 'ो', 'ê': 'ौ', 'ñ': 'ृ',
+                'ö': 'ॄ', 'Û': 'ॢ', 'Ü': 'ॣ',
+
+                // Punctuation and symbols
+                'M': '।', '<': '॥', '>': '॰', 'N': 'ॐ',
+
+                // Numbers
+                '0': '०', '1': '१', '2': '२', '3': '३', '4': '४',
+                '5': '५', '6': '६', '7': '७', '8': '८', '9': '९',
+
+                // Special characters
+                ':': 'ऽ', 'Z': 'ँ', 'B': 'ं', 'V': 'ः', '‘': '़',
+                '„': '॑', '†': '॒',
+
+                // Combined characters (for half forms)
+                'sÌ': 'क्', 'vÌ': 'ख्', 'uÌ': 'ग्', '¢Ì': 'घ्', 'ÙÌ': 'ङ्',
+                'rÌ': 'च्', 'RÌ': 'छ्', 'tÌ': 'ज्', 'TÌ': 'झ्', 'yÌ': 'ञ्',
+                'wÌ': 'ट्', 'WÌ': 'ठ्', 'qÌ': 'ड्', 'QÌ': 'ढ्', 'XÌ': 'ण्',
+                'eÌ': 'त्', 'EÌ': 'थ्', 'aÌ': 'द्', 'AÌ': 'ध्', 'zÌ': 'न्',
+                'pÌ': 'प्', 'PÌ': 'फ्', 'cÌ': 'ब्', 'CÌ': 'भ्', 'nÌ': 'म्',
+                'iÌ': 'य्', 'bÌ': 'र्', 'oÌ': 'ल्', 'OÌ': 'व्', ';Ì': 'श्',
+                "'Ì": 'ष्', 'xÌ': 'स्', ']Ì': 'ह्', '\\Ì': 'ळ्'
+            };
+
+            // Function to convert Krutidev to Unicode
+            function convertToUnicode(text) {
+                let result = '';
+
+                // First handle combined characters (like half forms)
+                const combinedChars = Object.keys(krutidevToUnicode).sort((a, b) => b.length - a.length);
+
+                let i = 0;
+                while (i < text.length) {
+                    let matched = false;
+
+                    // Check for combined characters first (longer sequences first)
+                    for (const char of combinedChars) {
+                        if (text.startsWith(char, i)) {
+                            result += krutidevToUnicode[char];
+                            i += char.length;
+                            matched = true;
+                            break;
+                        }
+                    }
+
+                    if (!matched) {
+                        // If no combined character matched, try single character
+                        const currentChar = text[i];
+                        if (krutidevToUnicode.hasOwnProperty(currentChar)) {
+                            result += krutidevToUnicode[currentChar];
+                        } else {
+                            // If no mapping found, keep the original character
+                            result += currentChar;
+                        }
+                        i++;
+                    }
+                }
+
+                return result;
+            }
+
+            // Event listeners
+            convertBtn.addEventListener('click', function() {
+                const inputText = krutidevText.value;
+                const convertedText = convertToUnicode(inputText);
+                unicodeText.value = convertedText;
+            });
+
+            clearBtn.addEventListener('click', function() {
+                krutidevText.value = '';
+                unicodeText.value = '';
+            });
+
+            copyBtn.addEventListener('click', function() {
+                unicodeText.select();
+                document.execCommand('copy');
+
+                // Show a temporary message
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+
+
+        });
+    </script>
+    
+</body>
+</html>
