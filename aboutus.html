@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href=style.css>
+    <title>About Us</title>
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="" class="logo">github.io</a>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="aboutus.html">About</a></li>
+                <li><a href="/">Unicode to Krutidev Converter</a></li>
+                <li><a href="krutidevtounicodeconverter.html">Krutidev to Unicode Converter</a></li>
+                <li><a href="unicodetochanakyafontconverter.html">Unicode to Chanakya Font Converter</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    <div class="container">
+    <h1>About Us</h1>
+    <hr>
+   <p>Welcome to unicodetokrutidev.github.io – your one-stop destination for seamless Hindi font conversions. We specialize in providing fast, reliable, and easy-to-use tools for converting between popular Hindi typing formats and legacy fonts, ensuring smooth communication and document handling across various platforms.</p>
+</div>
+<script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link (for mobile)
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
+<footer>
+    <div class="footer-container">
+      <div class="footer-section">
+          <h3>Font Converter</h3>
+          <ul class="legal-links">
+              <li><a href="/">Unicode to Krutidev Converter</a></li>
+              <li><a href="krutidevtounicodeconverter.html">Krutidev to Unicode Converter</a></li>
+              <li><a href="unicodetochanakyafontconverter.html">Unicode to Chanakya Font Converter</a></li>
+          </ul>
+      </div>
+
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul class="legal-links">
+                <li><a href="disclaimer.html">Disclaimer</a></li>
+                <li><a href="privacypolicy.html">Privacy Policy</a></li>
+                <li><a href="aboutus.html">about Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <h4>Contact Us</h4>
+        aymcar5454@gmail.com
+
+    </div>
+    <div class="copyright">
+        &copy; 2025 unicodetokrutidev.github.io. All rights reserved.
+    </div>
+</footer>
+  </body>
+</html>
